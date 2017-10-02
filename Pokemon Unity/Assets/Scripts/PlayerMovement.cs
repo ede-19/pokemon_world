@@ -1155,9 +1155,13 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator wildEncounter(WildPokemonInitialiser.Location encounterLocation)
     {
+		double numberX = 0;
         if (accessedMapSettings.getEncounterList(encounterLocation).Length > 0)
         {
-            if (Random.value <= accessedMapSettings.getEncounterProbability())
+			numberX = ramx ();
+			Debug.Log ("Numero: " + numberX);
+            //if (Random.value <= accessedMapSettings.getEncounterProbability())
+			if (numberX <= accessedMapSettings.getEncounterProbability())
             {
                 if (setCheckBusyWith(Scene.main.Battle.gameObject))
                 {
@@ -1184,6 +1188,31 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+//--------------------------------------------------------------------------------------
+	unsafe public float ramx(){
+		float numero=0, s = 0, m = 0;
+
+		m = float.Parse(System.DateTime.Now.ToString("fff")) ; 
+		if (m > 200) {
+			while (m > 200) {
+				m = m - 100;
+			}
+		}
+
+		s = float.Parse(System.DateTime.Now.ToString("ss")); 
+		s = s + 1;
+
+		numero = s / m;
+
+		while (numero > 1) {
+			numero = numero - 1;
+		}
+
+		Debug.Log ( ", Segundos: "+ s +" | Milisegundos: "+ m +" >> "+numero);
+		return numero;
+	}
+
+//--------------------------------------------------------------------------------------
 
     private void playClip(AudioClip clip)
     {
